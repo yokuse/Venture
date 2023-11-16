@@ -1,0 +1,51 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+venture-app/node_modules
+venture-app/.pnp
+venture-app/.pnp.js
+
+# testing
+venture-app/coverage
+
+# next.js
+venture-app/.next/
+venture-app/out/
+
+# production
+venture-app/build
+
+# misc
+venture-app/.DS_Store
+venture-app/*.pem
+
+# debug
+venture-app/npm-debug.log*
+venture-app/yarn-debug.log*
+venture-app/yarn-error.log*
+venture-app/.pnpm-debug.log*
+
+# local env files
+venture-app/.env*.local
+venture-app/.env
+deployment/venture/dockerenv
+deployment/stripe/dockerenv
+deployment/sonarqube/dockerenv
+
+# vercel
+venture-app/.vercel
+venture-app/_static
+
+# typescript
+venture-app/*.tsbuildinfo
+venture-app/next-env.d.ts
+
+# firebase 
+Venture/venture-app/lib/firebase/firebase.ts
+Venture/venture-app/lib/firebase/*
+
+# semgrep
+.semgrepignore
+
+# e2e test
+venture-app/cypress/videos

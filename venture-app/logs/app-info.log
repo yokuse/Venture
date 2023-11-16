@@ -1,0 +1,10 @@
+{"level":"info","time":1666983602651,"pid":828,"hostname":"LYCAON-PC","msg":"User with email: 2000530@sit.singaporetech.edu.sg login successfully"}
+{"level":"info","time":1666983857927,"pid":828,"hostname":"LYCAON-PC","msg":"User with email: 2000530@sit.singaporetech.edu.sg logged out successfully"}
+{"level":"info","time":1666984694964,"pid":939,"hostname":"LYCAON-PC","msg":"User with email: 2000530@sit.singaporetech.edu.sg login successfully"}
+{"level":"info","time":1666984734250,"pid":939,"hostname":"LYCAON-PC","msg":"Project created successfully by :2000530@sit.singaporetech.edu.sg"}
+{"level":"info","time":1666984774491,"pid":939,"hostname":"LYCAON-PC","msg":"Project deleted successfully by: 2000530@sit.singaporetech.edu.sg"}
+{"level":"info","time":1666985082891,"pid":1071,"hostname":"LYCAON-PC","msg":"User with email: 2000530@sit.singaporetech.edu.sg logged out successfully"}
+{"level":"info","time":1666985127293,"pid":1071,"hostname":"LYCAON-PC","msg":"User with email: 2000530@sit.singaporetech.edu.sg login successfully"}
+{"level":"info","time":1667118709734,"pid":208,"hostname":"LYCAON-PC","msg":"User with email: 2000530@sit.singaporetech.edu.sg login successfully"}
+{"level":"info","time":1667118766278,"pid":208,"hostname":"LYCAON-PC","msg":"Project created successfully by :2000530@sit.singaporetech.edu.sg"}
+{"level":"info","time":1667118813783,"pid":208,"hostname":"LYCAON-PC","msg":"CheckoutSession created successfully"}

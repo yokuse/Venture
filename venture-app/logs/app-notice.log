@@ -1,0 +1,2 @@
+{"level":"notice","time":1666981276347,"pid":828,"hostname":"LYCAON-PC","msg":"User with email: 2000530@sit.singaporetech.edu.sg login failed"}
+{"level":"notice","time":1666981485172,"pid":828,"hostname":"LYCAON-PC","msg":"Non POST Request made to login API"}

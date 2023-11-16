@@ -1,0 +1,71 @@
+version: '2.10'
+
+services:
+  nginx-proxy:
+    image: owasp/modsecurity-crs:nginx
+    container_name: nginx-proxy
+    networks:
+      - jenkins_nw
+      - webapp_nw
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - conf:/etc/nginx/conf.d
+      - certs:/etc/nginx/certs
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+    environment:
+      - SERVERNAME=venture
+      - BLOCKING_PARANOIA=1 # Make sure to test all app functions to see if we need to lower
+      - ANOMALY_INBOUND=5
+      - ANOMALY_OUTBOUND=4
+      - REPORTING_LEVEL=2
+      - PROXY=1
+      - PROXY_SSL=on
+      - BACKEND=venture
+      - PORT=8000
+      - MODSEC_RULE_ENGINE=on # Off if we have to setup jenkins again from scratch
+
+  dockergen:
+    image: nginxproxy/docker-gen
+    container_name: nginx-proxy-gen
+    command: -notify-sighup nginx-proxy -watch /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
+    networks:
+      - jenkins_nw
+      - webapp_nw
+    volumes_from:
+      - nginx-proxy
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl:ro
+    labels:
+      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.docker_gen"
+
+  nginx-proxy-acme:
+    image: nginxproxy/acme-companion
+    container_name: nginx-proxy-acme
+    volumes_from:
+      - nginx-proxy
+    volumes:
+      - ${HOST_DOCKER_SOCK}:/var/run/docker.sock:ro
+      - acme:/etc/acme.sh
+      - certs:/etc/nginx/certs:rw
+    environment:
+      - DEFAULT_EMAIL=${NGINX_ACME_EMAIL}
+   
+
+networks:
+  jenkins_nw:
+    name: jenkins_nw
+    driver: bridge
+  webapp_nw:
+    name: webapp_nw
+    driver: bridge
+
+volumes:
+  certs:
+  vhost:
+  html:
+  acme:
+  conf:

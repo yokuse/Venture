@@ -1,0 +1,30 @@
+  # nginx-proxy:
+  #   image: nginxproxy/nginx-proxy
+  #   container_name: nginx_proxy
+  #   restart: always
+  #   networks:
+  #     - jenkins_nw
+  #     - webapp_nw
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - certs:/etc/nginx/certs
+  #     - vhost:/etc/nginx/vhost.d
+  #     - html:/usr/share/nginx/html
+  #     - ${HOST_DOCKER_SOCK}:/tmp/docker.sock:ro
+  #   environment:
+  #     - DEFAULT_HOST=${WEB_DOMAIN}
+
+  # nginx:
+  # image: nginx
+  # container_name: nginx
+  # networks:
+  #   - jenkins_nw
+  #   - webapp_nw
+  # ports:
+  #   - "80:80"
+  #   - "443:443"
+  # volumes:
+  #   - /etc/nginx/conf.d
+  #   - certs:/etc/nginx/certs

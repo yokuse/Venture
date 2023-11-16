@@ -1,0 +1,63 @@
+version: '2.10'
+
+services:
+  # Jenkins - Internal docker service for jenkins agents
+  docker:
+    image: docker:dind
+    container_name: jenkins_docker
+    restart: always
+    privileged: true
+    networks:
+      jenkins_nw:
+        aliases:
+          - docker
+    environment:
+      DOCKER_TLS_CERTDIR: /certs
+      VIRTUAL_PORT: 2376
+    volumes:
+      - jenkins-docker-certs:/certs/client
+      - jenkins-data:/var/jenkins_home
+    ports:
+      - "2376:2376"
+
+  # Jenkins - Main Jenkins service
+  jenkins:
+    image: jenkinsci/blueocean:latest
+    container_name: jenkins_blueocean
+    restart: always
+    depends_on:
+      - docker
+    networks:
+      jenkins_nw:
+        aliases:
+          - jenkins
+    user: root
+    environment:
+      DOCKER_HOST: docker
+      DOCKER_CERT_PATH: /certs/client
+      DOCKER_TLS_VERIFY: 1
+      VIRTUAL_HOST: ${JENKINS_DOMAIN}
+      VIRTUAL_PORT: 8080
+      LETSENCRYPT_HOST: ${JENKINS_DOMAIN}
+    volumes:
+      - jenkins-docker-certs:/certs/client:ro
+      - jenkins-data:/var/jenkins_home
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    # expose:
+    #   - "8080"
+
+  # End of Jenkins
+
+networks:
+  jenkins_nw:
+    name: jenkins_nw
+    driver: bridge
+  webapp_nw:
+    name: webapp_nw
+    driver: bridge
+
+volumes:
+  jenkins-docker-certs:
+  jenkins-data:

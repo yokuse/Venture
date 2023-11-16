@@ -1,0 +1,20 @@
+# docker-compose environment file
+#
+# WARNING: Do NOT store any secrets in this docker-compose environment file
+# If there is a need for secrets, then it should be stored in another secured env file
+
+# Jenkins Settings
+export JENKINS_DOMAIN=jenkins.letsventure.ml
+export JENKINS_VHOST_CONF=./vhost.d/jenkins.letsventure.ml
+
+# Host Docker Engine Settings
+export HOST_DOCKER_SOCK=/var/run/docker.sock
+export HOST_VHOST=./vhost.d
+
+# Nginx Settings
+export NGINX_CONF=./proxy.conf
+export NGINX_ACME_EMAIL=letsventurecsd@outlook.com
+
+
+# Web Settings
+export WEB_DOMAIN=letsventure.ml

@@ -1,0 +1,23 @@
+version: '2.10'
+
+services:
+  # Test webapp - to be replaced
+  venture_docker:
+    image: jwilder/whoami
+    container_name: venture_docker
+    networks:
+      webapp_nw:
+        aliases:
+          - venture
+    environment:
+      - VIRTUAL_HOST=${WEB_DOMAIN},www.${WEB_DOMAIN}
+      - VIRTUAL_PORT=8000
+      - LETSENCRYPT_HOST=${WEB_DOMAIN},www.${WEB_DOMAIN}
+
+networks:
+  jenkins_nw:
+    name: jenkins_nw
+    driver: bridge
+  webapp_nw:
+    name: webapp_nw
+    driver: bridge

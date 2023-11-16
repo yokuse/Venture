@@ -1,0 +1,36 @@
+version: '2.10'
+services:
+  venture_docker:
+    build:
+      context: ../../venture-app/
+      args:
+        - NEXTAUTH_URL=${NEXTAUTH_URL}
+        - DATABASE_URL=${DATABASE_URL}
+        - JWT_SECRET=4{JWT_SECRET}
+        - NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}
+        - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+        - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+        - SECRET_COOKIE_PASSWORD=${SECRET_COOKIE_PASSWORD}
+        - NODE_ENV=${NODE_ENV}
+        - EMAIL_NAME=${EMAIL_NAME}
+        - EMAIL_SECRET=${EMAIL_SECRET}
+        - FIREBASE_APIKEY=${FIREBASE_APIKEY}
+    container_name: venture_docker
+    networks:
+      webapp_nw:
+        aliases:
+          - venture
+    ports:
+      - 8000:8000
+    environment:
+      - VIRTUAL_HOST=${WEB_DOMAIN},www.${WEB_DOMAIN}
+      - VIRTUAL_PORT=8000
+      - LETSENCRYPT_HOST=${WEB_DOMAIN},www.${WEB_DOMAIN}
+
+networks:
+  jenkins_nw:
+    name: jenkins_nw
+    driver: bridge
+  webapp_nw:
+    name: webapp_nw
+    driver: bridge

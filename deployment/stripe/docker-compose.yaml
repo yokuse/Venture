@@ -1,0 +1,21 @@
+version: '2.10'
+
+services:
+  stripe-cli:
+    image: stripe/stripe-cli
+    container_name: stripe-webhook
+    command: "listen --api-key ${STRIPE_SECRET_KEY} --forward-to ${WEB_DOMAIN}/api/webhooks"
+  
+    networks:
+      webapp_nw:
+        aliases:
+          - stripe-listener
+  
+networks:
+  jenkins_nw:
+    name: jenkins_nw
+    driver: bridge
+  webapp_nw:
+    name: webapp_nw
+    driver: bridge
+  
